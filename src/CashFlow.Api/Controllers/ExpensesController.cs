@@ -1,4 +1,5 @@
-﻿using CashFlow.Communication.Request;
+﻿using CashFlow.Application.UseCases.Expenses.Register;
+using CashFlow.Communication.Request;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CashFlow.Api.Controllers
@@ -10,7 +11,10 @@ namespace CashFlow.Api.Controllers
         [HttpPost]
         public IActionResult Register([FromBody] RequestRegisterExpenseJson request)
         {
-            return Created();       
+            var useCase = new RegisterExpenseUseCase();
+
+            var response = useCase.Execute(request);
+            return Created(string.Empty, response);       
         }
     }
 }
