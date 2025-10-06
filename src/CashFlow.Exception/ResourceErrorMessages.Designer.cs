@@ -79,15 +79,6 @@ namespace CashFlow.Exception {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Payment type is not valid.
-        /// </summary>
-        public static string PAYMENT_TYPE_INVALID {
-            get {
-                return ResourceManager.GetString("PAYMENT_TYPE_INVALID", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The tile is required.
         /// </summary>
         public static string TITLE_REQUIRED {
