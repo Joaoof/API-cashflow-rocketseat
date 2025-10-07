@@ -30,6 +30,15 @@ public class RegisterExpenseValidatorTeste
         result.IsValid.Should().BeFalse();
         result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage.Equals(ResourceErrorMessages.TITLE_REQUIRED));
     }
+    [Fact]
+    public void Error_Date_Future()
+    {
+        var validator = new RegisterExpenseValidator();
+        var request = RequestRegisterExpensesJsonBuilder.Build();
+        request.Date = DateTime.UtcNow.AddDays(1);
 
-    public void
+        var result = validator.Validate(request);
+        result.IsValid.Should().BeTrue();
+        result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage.Equals(ResourceErrorMessages.TITLE_REQUIRED));
+    }
 }
