@@ -18,7 +18,7 @@ public class RegisterExpenseValidatorTeste
         result.IsValid.Should().BeTrue();
 
     }
-
+    [Fact]
     public void Error_Title_Empty()
     {
         var validator = new RegisterExpenseValidator();
@@ -30,4 +30,6 @@ public class RegisterExpenseValidatorTeste
         result.IsValid.Should().BeFalse();
         result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage.Equals(ResourceErrorMessages.TITLE_REQUIRED));
     }
+
+    public void
 }
