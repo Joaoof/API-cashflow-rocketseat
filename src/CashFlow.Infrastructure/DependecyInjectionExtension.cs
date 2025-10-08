@@ -1,14 +1,16 @@
 ﻿using CashFlow.Domain.Repositories.Expenses;
 using CashFlow.Infrastructure.DataAccess;
 using CashFlow.Infrastructure.DataAccess.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CashFlow.Infrastructure;
 public static class DependecyInjectionExtension
 {
-    public static void AddInfrastructure(this IServiceCollection services)
+    public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        AddDbContext(services);
+        AddDbContext(services, configuration);
         AddRepositories(services);
     }
 
@@ -16,8 +18,10 @@ public static class DependecyInjectionExtension
     {
         services.AddScoped<IExpensesRepository, ExpenseRepository>();
     }
-    private static void AddDbContext(IServiceCollection services)
+    private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<CashFlowDbContext>();
+        var connectionString = configuration.GetConnectionString("Connection");
+
+        services.AddDbContext<CashFlowDbContext>(config => config.UseNpgsql(connectionString));
     }
 }
