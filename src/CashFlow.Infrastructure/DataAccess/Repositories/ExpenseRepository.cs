@@ -8,7 +8,7 @@ internal class ExpenseRepository : IExpensesRepository
     private readonly CashFlowDbContext _dbContext;
     public ExpenseRepository(CashFlowDbContext dbContext)
     {
-        _dbContext = dbContext;        
+        _dbContext = dbContext;
     }
     public void Add(Expense expense)
     {
