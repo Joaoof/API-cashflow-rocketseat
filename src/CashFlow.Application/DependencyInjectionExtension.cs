@@ -13,7 +13,7 @@ public static class DependencyInjectionExtension
 
     private static void AddAutoMapper(IServiceCollection services)
     {
-        services.AddAutoMapper(cfg => cfg.LicenseKey = "<License Key Here>", typeof(AutoMapping));
+        services.AddAutoMapper(cfg => { }, typeof(AutoMapping).Assembly);
     }
 
     private static void AddUseCases(this IServiceCollection services)
