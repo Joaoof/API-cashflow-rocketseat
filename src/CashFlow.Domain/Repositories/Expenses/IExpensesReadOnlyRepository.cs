@@ -1,0 +1,9 @@
+﻿using CashFlow.Domain.Entities;
+
+namespace CashFlow.Domain.Repositories.Expenses;
+
+public interface IExpensesReadOnlyRepository
+{
+    Task<List<Expense>> GetAllExpenses();
+    Task<Expense?> GetById(Guid id);
+}
