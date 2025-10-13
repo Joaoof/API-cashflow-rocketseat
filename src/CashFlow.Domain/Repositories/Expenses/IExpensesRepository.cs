@@ -6,4 +6,5 @@ public interface IExpensesRepository
 {
     Task Add(Expense expense);
     Task<List<Expense>> GetAllExpenses();
+    Task<Expense?> GetById(Guid id);
 }

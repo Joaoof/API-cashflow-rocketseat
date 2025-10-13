@@ -34,5 +34,13 @@ namespace CashFlow.Api.Controllers
             }
             return NoContent();
         }
+        [HttpGet]
+        [ProducesResponseType(typeof(ResponseExpensesJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseExpensesJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetById([FromServices] IGetAllExpenseUseCase useCase, [FromRoute] Guid id)
+        {
+            var response = await useCase.Execute(id);
+            return Ok(response);
+        }
     }
 }
