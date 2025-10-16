@@ -6,9 +6,9 @@ namespace CommonTestUtilities.Request;
 
 public class RequestRegisterExpensesJsonBuilder
 {
-    public static RequestRegisterExpenseJson Build()
+    public static RequestExpenseJson Build()
     {
-        return new Faker<RequestRegisterExpenseJson>().RuleFor(r => r.Title, faker => faker.Commerce.ProductName())
+        return new Faker<RequestExpenseJson>().RuleFor(r => r.Title, faker => faker.Commerce.ProductName())
             .RuleFor(r => r.Description, faker => faker.Commerce.ProductDescription())
             .RuleFor(r => r.Date, faker => faker.Date.Past())
             .RuleFor(r => r.PaymentType, faker => faker.PickRandom<PaymentType>())
