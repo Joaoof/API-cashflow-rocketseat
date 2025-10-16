@@ -1,4 +1,6 @@
-﻿using CashFlow.Application.UseCases.Expenses.GetAll;
+﻿using CashFlow.Application.UseCases.Expenses.Delete;
+using CashFlow.Application.UseCases.Expenses.GetAll;
+using CashFlow.Application.UseCases.Expenses.GetById;
 using CashFlow.Application.UseCases.Expenses.Register;
 using CashFlow.Communication.Request;
 using CashFlow.Communication.Responses;
@@ -35,12 +37,24 @@ namespace CashFlow.Api.Controllers
             return NoContent();
         }
         [HttpGet]
+        [Route("{id}")]
         [ProducesResponseType(typeof(ResponseExpensesJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseExpensesJson), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetById([FromServices] IGetAllExpenseUseCase useCase, [FromRoute] Guid id)
+        public async Task<IActionResult> GetById([FromServices] IGetByIdExpenseUseCase useCase, [FromRoute] Guid id)
         {
             var response = await useCase.Execute(id);
             return Ok(response);
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Delete([FromServices] IDeleteExpenseUseCase useCase, [FromRoute] Guid id)
+        {
+            await useCase.Execute(id);
+
+            return NoContent();
         }
     }
 }
